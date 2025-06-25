@@ -11,18 +11,31 @@ const RestoCard = ({ restaurant }: RestaurantCardProps): JSX.Element => {
     restaurant.info;
 
   return (
-    <div className="w-[200px] h-auto cursor-pointer bg-amber-100  border border-transparent hover:border-black p-2">
+    <div className="w-[250px] h-auto cursor-pointer rounded-lg bg-gray-200  border border-transparent hover:border-gray-400 p-2">
       <img
-        className="w-[190px] h-[160px]"
+        className="w-[230px] h-[160px] rounded-lg"
         src={CLOUDINARY_URL + cloudinaryImageId}
         alt="restlogo"
       />
-      <h1 className="text-2xl">{name}</h1>
-      <h1 className="text-xl">{locality}</h1>
-      <h2 className="text-lg">Cost for two: {costForTwo}</h2>
+      <h1 className="font-bold py-2 text-lg">{name}</h1>
+      <h1 className="text-md">{locality}</h1>
+      <h2 className="text-md">Cost for two: {costForTwo}</h2>
       <h3 className="text-sm">Rating: {avgRating} ⭐</h3>
     </div>
   );
+};
+
+export const withPromotedLabel = (RestaurantCard: any) => {
+  return (props: any) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">
+          Promoted
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestoCard;
