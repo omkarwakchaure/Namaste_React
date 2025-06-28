@@ -8,14 +8,19 @@ import Error from "./components/Error.tsx";
 import RestaurantMenu from "./components/RestaurantMenu.tsx";
 // import Grocery from "./components/Grocery.tsx";
 import { lazy, Suspense } from "react";
+import { Provider } from "react-redux";
+import appStore from "./utils/app.store.ts";
+import Cart from "./components/Cart.tsx";
 
 const Grocery = lazy(() => import("./components/Grocery.tsx"));
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div>
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   );
 };
 
@@ -48,6 +53,10 @@ export const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path:"/cart",
+        element:<Cart/>
+      }
     ],
     errorElement: <Error />,
   },
